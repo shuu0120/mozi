@@ -11,6 +11,8 @@ public class LetterImage_Manager : MonoBehaviour
 
     private int previousImageIndex = -1; // 初期値は-1で前回の画像がないことを示す
 
+    private int currentImageIndex = -1;
+
     private void Setup(int imageIndex)
     {
         LetterImage.sprite = LetterImages[imageIndex];
@@ -20,6 +22,7 @@ public class LetterImage_Manager : MonoBehaviour
     public void OnClickButton(int[] imageIndices)
     {
         int imageIndex;
+
         do
         {
             imageIndex = Random.Range(0, LetterImages.Length);
@@ -28,7 +31,7 @@ public class LetterImage_Manager : MonoBehaviour
         Setup(imageIndex);
 
         // 選択された画像がボタンに紐づけられた画像と一致する場合、デバックログに「正解」と表示する
-        if (System.Array.IndexOf(imageIndices, imageIndex) != -1)
+        if (System.Array.IndexOf(imageIndices, currentImageIndex) != -1)
         {
             Debug.Log("正解");
         }
@@ -36,7 +39,8 @@ public class LetterImage_Manager : MonoBehaviour
         {
             Debug.Log("不正解");
         }
-
+       
+        currentImageIndex = imageIndex;
 
     }
 
