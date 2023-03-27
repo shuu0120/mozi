@@ -1,21 +1,19 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
-public class LetterImage_Manager : MonoBehaviour
+public class BlackGameManager : MonoBehaviour
 {
     public Image LetterImage;
     public Sprite[] LetterImages;
-    public GameObject gameover;
     private int hp;
-    private int count;
 
     private int previousImageIndex = -1; // 初期値は-1で前回の画像がないことを示す
 
     private int currentImageIndex = -1;
+
+    public GameObject gameoverpanel;
 
     private void Setup(int imageIndex)
     {
@@ -38,23 +36,18 @@ public class LetterImage_Manager : MonoBehaviour
         if (System.Array.IndexOf(imageIndices, currentImageIndex) != -1)
         {
             Debug.Log("正解");
-            count++;
-            if (count == 10)
-            {
-                SceneManager.LoadScene("Play_black");
-            }
-            
         }
         else
         {
             Debug.Log("不正解");
             hp--;
-            if (hp ==0)
+            if(hp == 0)
             {
-                gameover.gameObject.SetActive(true);
+                gameoverpanel.gameObject.SetActive(true);
             }
+
         }
-       
+
         currentImageIndex = imageIndex;
 
     }
@@ -73,40 +66,5 @@ public class LetterImage_Manager : MonoBehaviour
         Button4.onClick.AddListener(() => OnClickButton(new int[] { 12, 13, 14, 15 }));
 
         hp = 2;
-        count = 0;
     }
 }
-//    public Image LetterImage;
-//    public Sprite[] LetterImages;
-
-//    private int previousImageIndex = -1; // 初期値は-1で前回の画像がないことを示す
-
-//    private void Setup()
-//    {
-//        int imageIndex;
-//        do
-//        {
-//            imageIndex = Random.Range(0, LetterImages.Length);
-//        } while (imageIndex == previousImageIndex); // 前回の画像と異なる画像を選択する
-
-//        LetterImage.sprite = LetterImages[imageIndex];
-//        previousImageIndex = imageIndex; // 前回表示した画像のインデックスを保存する
-//    }
-
-//    public void OnClickButton()
-//    {
-//        Setup();
-//}
-
-// Start is called before the first frame update
-/*void Start()
-{
-
-}
-
-// Update is called once per frame
-void Update()
-{
-
-}*/
-//}
