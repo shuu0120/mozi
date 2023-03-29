@@ -10,9 +10,16 @@ public class LetterImage_Manager : MonoBehaviour
     public Image LetterImage;
     public Sprite[] LetterImages;
     public GameObject gameover;
+    public GameObject countDownText;
+    public Button Button1;
+    public Button Button2;
+    public Button Button3;
+    public Button Button4;
+    
     private int hp;
     private int count;
-
+    private float time;
+    
     private int previousImageIndex = -1; // 初期値は-1で前回の画像がないことを示す
 
     private int currentImageIndex = -1;
@@ -23,10 +30,31 @@ public class LetterImage_Manager : MonoBehaviour
         previousImageIndex = imageIndex; // 前回表示した画像のインデックスを更新する
     }
 
+    private IEnumerator CountDown()
+    {
+        countDownText.SetActive(true);
+        int countDownTime = 2;
+        while (countDownTime > 0)
+        {
+            countDownText.GetComponent<Text>().text = countDownTime.ToString();
+            yield return new WaitForSeconds(1);
+            countDownTime--;
+        }
+        countDownText.SetActive(false);
+        Button1.interactable = true;
+        Button2.interactable = true;
+        Button3.interactable = true;
+        Button4.interactable = true;
+        Button1.onClick.Invoke();
+       
+    }
+
+   
+
     public void OnClickButton(int[] imageIndices)
     {
         int imageIndex;
-
+        time = 0f;
         do
         {
             imageIndex = Random.Range(0, LetterImages.Length);
@@ -39,6 +67,7 @@ public class LetterImage_Manager : MonoBehaviour
         {
             Debug.Log("正解");
             count++;
+            
             if (count == 10)
             {
                 SceneManager.LoadScene("Play_black");
@@ -56,16 +85,37 @@ public class LetterImage_Manager : MonoBehaviour
         }
        
         currentImageIndex = imageIndex;
-
+       
     }
 
-    public Button Button1;
-    public Button Button2;
-    public Button Button3;
-    public Button Button4;
+
+    private IEnumerator CountDown2()
+    {
+        while (true)
+        {
+            
+            yield return new WaitForSeconds(1.1f);
+            time ++;
+
+            if (time >= 1.1f)
+            {
+                gameover.SetActive(true);
+                yield break;
+            }
+        }
+    }
+    private IEnumerator StartCountdown()
+    {
+        yield return new WaitForSeconds(2);
+
+        StartCoroutine(CountDown2());
+    }
+
 
     void Start()
     {
+       
+
         // ボタンにOnClickButtonメソッドを紐づける
         Button1.onClick.AddListener(() => OnClickButton(new int[] { 0, 1, 2, 3 }));
         Button2.onClick.AddListener(() => OnClickButton(new int[] { 4, 5, 6, 7 }));
@@ -74,39 +124,9 @@ public class LetterImage_Manager : MonoBehaviour
 
         hp = 2;
         count = 0;
+
+        StartCoroutine(CountDown());
+        StartCoroutine(StartCountdown());
+        
     }
 }
-//    public Image LetterImage;
-//    public Sprite[] LetterImages;
-
-//    private int previousImageIndex = -1; // 初期値は-1で前回の画像がないことを示す
-
-//    private void Setup()
-//    {
-//        int imageIndex;
-//        do
-//        {
-//            imageIndex = Random.Range(0, LetterImages.Length);
-//        } while (imageIndex == previousImageIndex); // 前回の画像と異なる画像を選択する
-
-//        LetterImage.sprite = LetterImages[imageIndex];
-//        previousImageIndex = imageIndex; // 前回表示した画像のインデックスを保存する
-//    }
-
-//    public void OnClickButton()
-//    {
-//        Setup();
-//}
-
-// Start is called before the first frame update
-/*void Start()
-{
-
-}
-
-// Update is called once per frame
-void Update()
-{
-
-}*/
-//}

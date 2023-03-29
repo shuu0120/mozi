@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BlackGameManager : MonoBehaviour
 {
     public Image LetterImage;
     public Sprite[] LetterImages;
+    public GameObject countDownText;
+    private int count;
+
     private int hp;
 
     private int previousImageIndex = -1; // 初期値は-1で前回の画像がないことを示す
@@ -19,6 +23,20 @@ public class BlackGameManager : MonoBehaviour
     {
         LetterImage.sprite = LetterImages[imageIndex];
         previousImageIndex = imageIndex; // 前回表示した画像のインデックスを更新する
+    }
+
+    private IEnumerator CountDown()
+    {
+        countDownText.SetActive(true);
+        int countDownTime = 2;
+        while (countDownTime > 0)
+        {
+            countDownText.GetComponent<Text>().text = countDownTime.ToString();
+            yield return new WaitForSeconds(1);
+            countDownTime--;
+        }
+        countDownText.SetActive(false);
+        Button1.onClick.Invoke();
     }
 
     public void OnClickButton(int[] imageIndices)
@@ -36,6 +54,11 @@ public class BlackGameManager : MonoBehaviour
         if (System.Array.IndexOf(imageIndices, currentImageIndex) != -1)
         {
             Debug.Log("正解");
+            count++;
+            if(count ==10)
+            {
+                SceneManager.LoadScene("Play_White");
+            }
         }
         else
         {
@@ -66,5 +89,7 @@ public class BlackGameManager : MonoBehaviour
         Button4.onClick.AddListener(() => OnClickButton(new int[] { 12, 13, 14, 15 }));
 
         hp = 2;
+        count = 0;
+        StartCoroutine(CountDown());
     }
 }
