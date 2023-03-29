@@ -15,10 +15,15 @@ public class LetterImage_Manager : MonoBehaviour
     public Button Button2;
     public Button Button3;
     public Button Button4;
+    public static int scoreCount;
+    public Text scoreText;
+
+    //timetxt
+    public Text timetext;
     
     private int hp;
     private int count;
-    private float time;
+    public float time;
     
     private int previousImageIndex = -1; // ‰Šú’l‚Í-1‚Å‘O‰ñ‚Ì‰æ‘œ‚ª‚È‚¢‚±‚Æ‚ðŽ¦‚·
 
@@ -54,7 +59,7 @@ public class LetterImage_Manager : MonoBehaviour
     public void OnClickButton(int[] imageIndices)
     {
         int imageIndex;
-        time = 0f;
+        time = 3.0f;
         do
         {
             imageIndex = Random.Range(0, LetterImages.Length);
@@ -67,7 +72,9 @@ public class LetterImage_Manager : MonoBehaviour
         {
             Debug.Log("³‰ð");
             count++;
-            
+            scoreCount++;
+            scoreText.text = "Score : " + scoreCount;
+
             if (count == 10)
             {
                 SceneManager.LoadScene("Play_black");
@@ -81,6 +88,7 @@ public class LetterImage_Manager : MonoBehaviour
             if (hp ==0)
             {
                 gameover.gameObject.SetActive(true);
+               
             }
         }
        
@@ -93,11 +101,11 @@ public class LetterImage_Manager : MonoBehaviour
     {
         while (true)
         {
-            
-            yield return new WaitForSeconds(1.1f);
-            time ++;
 
-            if (time >= 1.1f)
+            yield return null;
+            time -= Time.deltaTime;
+
+            if (time <= 0.0f)
             {
                 gameover.SetActive(true);
                 yield break;
@@ -127,6 +135,12 @@ public class LetterImage_Manager : MonoBehaviour
 
         StartCoroutine(CountDown());
         StartCoroutine(StartCountdown());
-        
+
+        scoreText.text = "Score : " + scoreCount;
     }
+    void Update()
+    {
+        timetext.text = time.ToString("f1") + "•b";
+    }
+        
 }

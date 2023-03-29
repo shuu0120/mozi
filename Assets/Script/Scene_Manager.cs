@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Scene_Manager : MonoBehaviour
 {
+
     public void GameScene()
     {
         SceneManager.LoadScene("Play_White");
@@ -18,5 +19,9 @@ public class Scene_Manager : MonoBehaviour
     {
         //現シーンをリスタート
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    void Start()
+    {
+        
     }
 }

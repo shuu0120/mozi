@@ -8,16 +8,22 @@ public class BlackGameManager : MonoBehaviour
 {
     public Image LetterImage;
     public Sprite[] LetterImages;
+    public GameObject gameoverpanel;
     public GameObject countDownText;
-    private int count;
-
+    public Button Button1;
+    public Button Button2;
+    public Button Button3;
+    public Button Button4;
+    public Text scoretext;
     private int hp;
+    private int count;
+    private float time;
+   
+ 
 
     private int previousImageIndex = -1; // 初期値は-1で前回の画像がないことを示す
 
     private int currentImageIndex = -1;
-
-    public GameObject gameoverpanel;
 
     private void Setup(int imageIndex)
     {
@@ -36,13 +42,20 @@ public class BlackGameManager : MonoBehaviour
             countDownTime--;
         }
         countDownText.SetActive(false);
+        Button1.interactable = true;
+        Button2.interactable = true;
+        Button3.interactable = true;
+        Button4.interactable = true;
         Button1.onClick.Invoke();
+
     }
+
+
 
     public void OnClickButton(int[] imageIndices)
     {
         int imageIndex;
-
+        time = 0.0f;
         do
         {
             imageIndex = Random.Range(0, LetterImages.Length);
@@ -55,33 +68,57 @@ public class BlackGameManager : MonoBehaviour
         {
             Debug.Log("正解");
             count++;
-            if(count ==10)
+            LetterImage_Manager.scoreCount++;
+            scoretext.text = "Score : " + LetterImage_Manager.scoreCount;
+
+            if (count == 10)
             {
                 SceneManager.LoadScene("Play_White");
             }
+
         }
         else
         {
             Debug.Log("不正解");
             hp--;
-            if(hp == 0)
+            if (hp == 0)
             {
                 gameoverpanel.gameObject.SetActive(true);
             }
-
         }
 
         currentImageIndex = imageIndex;
 
     }
 
-    public Button Button1;
-    public Button Button2;
-    public Button Button3;
-    public Button Button4;
+
+    private IEnumerator CountDown2()
+    {
+        while (true)
+        {
+
+            yield return null;
+            time += Time.deltaTime;
+
+            if (time >= 1.0f)
+            {
+                gameoverpanel.SetActive(true);
+                yield break;
+            }
+        }
+    }
+    private IEnumerator StartCountdown()
+    {
+        yield return new WaitForSeconds(2);
+
+        StartCoroutine(CountDown2());
+    }
+
 
     void Start()
     {
+
+
         // ボタンにOnClickButtonメソッドを紐づける
         Button1.onClick.AddListener(() => OnClickButton(new int[] { 0, 1, 2, 3 }));
         Button2.onClick.AddListener(() => OnClickButton(new int[] { 4, 5, 6, 7 }));
@@ -90,6 +127,10 @@ public class BlackGameManager : MonoBehaviour
 
         hp = 2;
         count = 0;
+
         StartCoroutine(CountDown());
+        StartCoroutine(StartCountdown());
+
+        scoretext.text = "Score : " + LetterImage_Manager.scoreCount;
     }
 }

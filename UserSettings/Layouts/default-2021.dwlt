@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: "\u30D2\u30A8\u30E9\u30EB\u30AD\u30FC"
+  m_Title: "\u30B2\u30FC\u30E0"
   m_RootView: {fileID: 5}
   m_MinSize: {x: 875, y: 371}
   m_MaxSize: {x: 10000, y: 10000}
@@ -366,23 +366,23 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 04f0ffff16f0ffff18f3ffffc4f3ffff64f7ffff28fbffff267b0000
+      m_ExpandedIDs: 429effff20a7ffffe0a9ffff46afffffa8b2ffffbab4ffff4cbbffff1ac0ffff82c2ffffccc5ffff40cfffff7ed1ffff50d4ffff9ed5ffff9ad6fffffcd6ffffe4eafffff6edffff1ef4ffff70f4ffff2ef9ffff28fbffff9e5e0000d45e0000027500003a7500004c760000827600003e7a0000887a0000be7d0000f47d0000367e0000887e0000c6820000fc820000e2830000368400005e8500009c850000a68b00005891000096910000d6a90000c4ed0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: TimeSlider
-        m_OriginalName: TimeSlider
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -4074
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 3}
+        m_ClientGUIView: {fileID: 10}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -638,9 +638,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 460.81516, y: 1207.4813, z: -2.4976883}
+    m_Target: {x: 483.4695, y: 1132.5148, z: -9.002863}
     speed: 2
-    m_Value: {x: 460.81516, y: 1207.4813, z: -2.4976883}
+    m_Value: {x: 483.4695, y: 1132.5148, z: -9.002863}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -691,9 +691,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 325.01685
+    m_Target: 975.5348
     speed: 2
-    m_Value: 325.01685
+    m_Value: 975.5348
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -853,21 +853,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Script
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Script
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: "C:\\Users\\\u8D8A\u524D\u5C4B\u67CA\\Unity\\SIKIMOJI"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 045e0000
-    m_LastClickedID: 24068
+    m_SelectedIDs: 025e0000
+    m_LastClickedID: 24066
     m_ExpandedIDs: 00000000f05d000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -921,8 +921,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 16f0ffff
-    m_LastClickedInstanceID: -4074
+    m_SelectedInstanceIDs: f69dffff
+    m_LastClickedInstanceID: -25098
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c623000000000000
     m_RenameOverlay:
