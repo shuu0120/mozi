@@ -17,6 +17,7 @@ public class LetterImage_Manager : MonoBehaviour
     public Button Button4;
     public static int scoreCount;
     public Text scoreText;
+    public Slider timeSlider;
 
     //timetxt
     public Text timetext;
@@ -51,6 +52,7 @@ public class LetterImage_Manager : MonoBehaviour
         Button3.interactable = true;
         Button4.interactable = true;
         Button1.onClick.Invoke();
+        timeSlider.gameObject.SetActive(true);
        
     }
 
@@ -59,7 +61,7 @@ public class LetterImage_Manager : MonoBehaviour
     public void OnClickButton(int[] imageIndices)
     {
         int imageIndex;
-        time = 3.0f;
+        time = 1.0f;
         do
         {
             imageIndex = Random.Range(0, LetterImages.Length);
@@ -87,6 +89,7 @@ public class LetterImage_Manager : MonoBehaviour
             hp--;
             if (hp ==0)
             {
+                timeSlider.gameObject.SetActive(false);
                 gameover.gameObject.SetActive(true);
                
             }
@@ -105,9 +108,10 @@ public class LetterImage_Manager : MonoBehaviour
             yield return null;
             time -= Time.deltaTime;
 
-            if (time <= 0.0f)
+            if (time <= -0.1f)
             {
                 gameover.SetActive(true);
+                timeSlider.gameObject.SetActive(false);
                 yield break;
             }
         }
@@ -118,7 +122,7 @@ public class LetterImage_Manager : MonoBehaviour
 
         StartCoroutine(CountDown2());
     }
-
+    
 
     void Start()
     {
@@ -137,10 +141,13 @@ public class LetterImage_Manager : MonoBehaviour
         StartCoroutine(StartCountdown());
 
         scoreText.text = "Score : " + scoreCount;
+        
     }
     void Update()
     {
-        timetext.text = time.ToString("f1") + "•b";
+        // timetext.text = time.ToString("f1") + "•b";
+        timeSlider.value = time;
+
     }
         
 }
