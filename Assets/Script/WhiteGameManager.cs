@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class BlackGameManager : MonoBehaviour
+public class WhiteGameManager : MonoBehaviour
 {
     //最初の画像
     public Image DefaultImage;
@@ -25,6 +25,9 @@ public class BlackGameManager : MonoBehaviour
     public Button Button3;
     public Button Button4;
 
+    //合計のスコアカウント
+    public static int scoreCountAll;
+
     //スコア表示テキスト
     public Text scoreText;
 
@@ -33,18 +36,18 @@ public class BlackGameManager : MonoBehaviour
 
     //スライダーの時間
     public float time;
-
+    
     //HPの変数
     private int hp;
 
-    //ブラックシーンのカウント
-    private int Blackcount;
+    //ホワイトシーンのカウント
+    private int Whitecount;
 
     //シーンをランダムに切り替えるための変数
     private int randomscore;
 
     //前回の画像を表す変数 - 0未満で宣言する(Array.IndexOfメソッドを使うため）
-    private int previousImageIndex = -1;
+    private int previousImageIndex = -1; 
 
     private int currentImageIndex = -1;
 
@@ -92,13 +95,13 @@ public class BlackGameManager : MonoBehaviour
 
         //時間制限のタイムスライダーをアクティブに
         timeSlider.gameObject.SetActive(true);
-
+       
     }
 
-    /*
-     * ４色のボタンが押されたときのメソッド
-     * @ どのボタンが押されたかの情報をGameIndicesで受け取っている。
-     */
+   /*
+    * ４色のボタンが押されたときのメソッド
+    * @ どのボタンが押されたかの情報をGameIndicesで受け取っている。
+    */
 
     public void OnClickButton(int[] GameIndices)
     {
@@ -113,7 +116,7 @@ public class BlackGameManager : MonoBehaviour
             imageIndex = Random.Range(0, GameImages.Length);
         }
         //imageIndexの中にランダムで前回と同じ数字が入ってしまった場合にもう一度doの中の処理をする
-        while (imageIndex == previousImageIndex);
+        while (imageIndex == previousImageIndex); 
 
         //前回と違う数字が入ったら、その数字をSetup()に渡す。
         Setup(imageIndex);
@@ -125,17 +128,17 @@ public class BlackGameManager : MonoBehaviour
             //正解の時
             Debug.Log("正解");
             //ローカルとグローバルのカウントそれぞれ++;
-            Blackcount++;
-            WhiteGameManager.scoreCountAll++;
+            Whitecount++;
+            scoreCountAll++;
 
             //GameOverPanelのテキストにグローバルカウントを表示
-            scoreText.text = "Score : " + WhiteGameManager.scoreCountAll;
+            scoreText.text = "Score : " + scoreCountAll;
 
-            if (Blackcount == randomscore)
+            if (Whitecount == randomscore)
             {
-                SceneManager.LoadScene("Play_White");
+                SceneManager.LoadScene("Play_black");
             }
-
+            
         }
         else
         {
@@ -146,16 +149,16 @@ public class BlackGameManager : MonoBehaviour
             hp--;
 
             //hpが0の時、ゲームオーバーにする
-            if (hp == 0)
+            if (hp ==0)
             {
                 timeSlider.gameObject.SetActive(false);
                 gameover.gameObject.SetActive(true);
-
+               
             }
         }
-        //現在出ているオブジェクトをcurrentImageIndexに代入
+       //現在出ているオブジェクトをcurrentImageIndexに代入
         currentImageIndex = imageIndex;
-
+       
     }
 
     /*
@@ -190,15 +193,15 @@ public class BlackGameManager : MonoBehaviour
 
         StartCoroutine(CountDown2());
     }
-
+    
 
     void Start()
     {
-
+       
 
         // ボタンにOnClickButtonメソッドを紐づける
         Button1.onClick.AddListener(() => OnClickButton(new int[] { 0, 1, 2 }));
-        Button2.onClick.AddListener(() => OnClickButton(new int[] { 3, 4, 5 }));
+        Button2.onClick.AddListener(() => OnClickButton(new int[] { 3, 4, 5}));
         Button3.onClick.AddListener(() => OnClickButton(new int[] { 6, 7, 8 }));
         Button4.onClick.AddListener(() => OnClickButton(new int[] { 9, 10, 11 }));
 
@@ -206,18 +209,18 @@ public class BlackGameManager : MonoBehaviour
         hp = 2;
 
         //現在のシーンの初期値を０
-        Blackcount = 0;
+        Whitecount = 0;
 
         //ランダムシーン切り替え変数の値
         randomscore = Random.Range(5, 10);
 
-        //ブラックシーンになったら呼び出されるメソッド
+        //ホワイトシーンになったら呼び出されるメソッド
         StartCoroutine(CountDown());
         StartCoroutine(StartCountdown());
 
         //スコアテキストに
-        scoreText.text = "Score：" + WhiteGameManager.scoreCountAll;
-
+        scoreText.text = "Score：" + scoreCountAll;
+        
     }
     void Update()
     {
@@ -225,5 +228,5 @@ public class BlackGameManager : MonoBehaviour
         timeSlider.value = time;
 
     }
-
+        
 }

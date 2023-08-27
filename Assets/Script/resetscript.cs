@@ -7,7 +7,8 @@ public class resetscript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LetterImage_Manager.scoreCount = 0;
+        //ƒOƒ[ƒoƒ‹•Ï”‚Ì‰Šú‰»
+        WhiteGameManager.scoreCountAll = 0;
     }
 
     // Update is called once per frame
