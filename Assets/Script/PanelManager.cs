@@ -36,7 +36,7 @@ public class PanelManager : MonoBehaviour
     public void back1()
     {
         panelexplain2.SetActive(false);
-        panelexplain1.SetActive(true);
+        panelexplain1.SetActive(false);
     }
     public void back2()
     {

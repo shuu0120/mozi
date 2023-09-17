@@ -8,11 +8,12 @@ TagManager:
   - blue
   - green
   - yellow
+  - front
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - front
   - Water
   - UI
   - 
@@ -44,4 +45,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: yaziryshi
+    uniqueID: 2654490611
+    locked: 0
+  - name: button
+    uniqueID: 1964104381
     locked: 0
